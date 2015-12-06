@@ -13,7 +13,7 @@ while(matchFound == False):
 	stringToHash = args.input + str(x)
 
 	hashedString = hashlib.md5(stringToHash).hexdigest()
-	if(hashedString[:5] == '00000'):
+	if(hashedString[:6] == '000000'):
 		matchFound = True
 	else:
 		x = x + 1
