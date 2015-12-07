@@ -20,26 +20,28 @@ for line in inputFile:
 	for i in range(0, len(fileLine.strip())):
 		subset = fileLine[i:i+n]
 		if(subset.endswith(subset[0]) and len(subset) == 3):
-			print fileLine, subset
 			partialStrings.append(fileLine)
 			break
+
+print 'num partials', len(partialStrings)
 
 for string in partialStrings:
 	n = 2
 	doubleChars = []
-	for i in range(0, len(string), n):
+	for i in range(0, len(string)):
 		doubleChars.append(string[i:i+n])
 
 	dupes = [k for k,v in Counter(doubleChars).items() if v>1]
 	if(dupes):
 		print "our dupes", dupes
-		print "string is:", doubleChars
 		index = doubleChars.index(dupes[0])
-		if(index != len(doubleChars)):
-			if(doubleChars[index+1].startswith(doubleChars[index][1])):
-				print "overlap for", doubleChars
-			else:
-				niceStrings.append(string)
+		print index
+		if(doubleChars[index] == doubleChars[index+1]):
+			print "string is:", string
+			print "true overlap"
+		else:
+			print "nice string is:", string
+			niceStrings.append(string)
 				
 			
 print len(niceStrings)
