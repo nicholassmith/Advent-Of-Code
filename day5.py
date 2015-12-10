@@ -37,7 +37,7 @@ for string in partialStrings:
 		index = doubleChars.index(dupes[0])
 		print index
 		if(doubleChars[index] == doubleChars[index+1]):
-			print "string is:", string
+			print "bad string is:", string
 			print "true overlap"
 		else:
 			print "nice string is:", string
