@@ -5,7 +5,7 @@ import sys, argparse
 start = [1,1,1,3,1,2,2,1,1,3]
 next = []
 
-for x in range(40):
+for x in range(50):
 	numList = start
 	
 	numGroup = [numList[0]]
