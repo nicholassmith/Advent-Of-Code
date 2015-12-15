@@ -15,6 +15,8 @@ for command in inputFile:
     (ops, res) = command.split('->')
     calc[res.strip()] = ops.strip().split(' ')
 
+calc['b'] = '16076'
+
 def calculate(name):
     try:
         return int(name)
