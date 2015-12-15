@@ -2,7 +2,7 @@
 
 import sys, argparse, itertools
 
-parser = argparse.ArgumentParser(description='Bobby Tables logic gates')
+parser = argparse.ArgumentParser(description='Matchsticks')
 parser.add_argument('-i', '--input', help='Input of instructions', required=True)
 args = parser.parse_args()
 
