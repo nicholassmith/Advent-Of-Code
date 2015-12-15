@@ -8,38 +8,36 @@ args = parser.parse_args()
 
 inputFile = open(args.input, 'rb')
 
-wires = {}
-oppers = {'AND', 'OR', 'NOT', 'LSHIFT', 'RSHIFT'}
+calc = dict()
+results = dict()
 
-def getWireValue(name):
-	try:
-		return int(name)
-	except ValueError:
-		pass
+for command in inputFile:
+    (ops, res) = command.split('->')
+    calc[res.strip()] = ops.strip().split(' ')
 
-	if name in wires:
-		return wires[name]
-	else:
-		wires[name] = 0
-		return wires[name]
+def calculate(name):
+    try:
+        return int(name)
+    except ValueError:
+        pass
 
-for line in inputFile:
-	(chunks, resultWire) = line.strip().split('->')
-	ops = chunks.split(' ')
-	if ops[0] in oppers:
-		if(ops[0] == 'NOT'):
-			wires[resultWire] = ~getWireValue(ops[1])
-	else:
-		print ops[0], ops[2]
-		if ops[1] == 'AND':
-			print getWireValue(ops[0]) & getWireValue(ops[2])
-			wires[resultWire] = getWireValue(ops[0]) & getWireValue(ops[2])
-		elif ops[1] == 'OR':
-			wires[resultWire] = getWireValue(ops[0]) | getWireValue(ops[2])
-		elif ops[1] == 'LSHIFT':
-			wires[resultWire] = getWireValue(ops[0]) << getWireValue(ops[2])
-		elif ops[1] == 'RSHIFT':
-			wires[resultWire] = getWireValue(ops[0]) >> getWireValue(ops[2])
+    if name not in results:
+        ops = calc[name]
+        if len(ops) == 1:
+            res = calculate(ops[0])
+        else:
+            op = ops[-2]
+            if 'AND' in op:
+              res = calculate(ops[0]) & calculate(ops[2])
+            elif 'OR' in op:
+              res = calculate(ops[0]) | calculate(ops[2])
+            elif 'NOT' in op:
+              res = ~calculate(ops[1]) & 0xffff
+            elif 'RSHIFT' in op:
+              res = calculate(ops[0]) >> calculate(ops[2])
+            elif 'LSHIFT' in op:
+              res = calculate(ops[0]) << calculate(ops[2])
+        results[name] = res
+    return results[name]
 
-
-print getWireValue('a')
+print "a: %d" % calculate('a')
