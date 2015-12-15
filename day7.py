@@ -15,8 +15,6 @@ for command in inputFile:
     (ops, res) = command.split('->')
     calc[res.strip()] = ops.strip().split(' ')
 
-calc['b'] = '16076'
-
 def calculate(name):
     try:
         return int(name)
@@ -41,5 +39,13 @@ def calculate(name):
               res = calculate(ops[0]) << calculate(ops[2])
         results[name] = res
     return results[name]
+
+aRes = calculate('a')
+print "a: %d" % aRes
+
+results.clear()
+
+(ops, res) = str(str(aRes) + ' -> b').split('->')
+calc[res.strip()] = ops.strip().split(' ')
 
 print "a: %d" % calculate('a')
