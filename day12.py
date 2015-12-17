@@ -20,7 +20,10 @@ def parse_json(obj):
 	elif isinstance(obj, list):
 		return sum(map(parse_json, obj))
 	elif isinstance(obj, dict):
-		return sum(map(parse_json, obj.values()))
+		if('red' in obj.values()):
+			return 0
+		else:
+			return sum(map(parse_json, obj.values()))
 	else:
 		return 0
 
