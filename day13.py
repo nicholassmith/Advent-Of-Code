@@ -26,6 +26,12 @@ for line in inputFile:
 
 	graph[p1, p2] = int(value)
 
+for person in people:
+	graph[person, 'me'] = 0
+	graph['me', person] = 0
+
+people.add('me')
+
 happiness = []
 
 for perm in permutations(people):
