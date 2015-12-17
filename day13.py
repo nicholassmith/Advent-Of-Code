@@ -29,13 +29,10 @@ for line in inputFile:
 happiness = []
 
 for perm in permutations(people):
-	print perm
 	happydex = 0
 	for i in range(len(perm)):
-		print 'happiness for', perm[i], perm[i-1], graph[perm[i],perm[i-1]]
 		happydex += graph[perm[i],perm[i-1]]
 		happydex += graph[perm[i-1],perm[i]]
-	print happydex
 	happiness.append(happydex)
 
 print max(happiness)
